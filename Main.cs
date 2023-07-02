@@ -3,7 +3,7 @@
     // indexs only valid from 0-19
     public readonly static (int, int) BOARD_SIZE = (20,20);
 
-    // head is at index 0
+    // head is snakeBody.Last
     public static SnakeQueue<Point> snakeBody = new SnakeQueue<Point>();
     public static Point food = new Point(15, 20);
 
