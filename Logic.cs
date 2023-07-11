@@ -1,12 +1,9 @@
-namespace SnakeGame
-{
-    public static class Logic
-    {
+namespace SnakeGame {
+    public static class Logic {
         // indexs only valid from 0-19
         public readonly static (int, int) BOARD_SIZE = (20,20);
 
-        public static void Run(LinkedList<Point> snakeBody, Point food, int dx, int dy)
-        {
+        public static void Run(LinkedList<Point> snakeBody, Point food, int dx, int dy) {
             LinkedListNode<Point>? lastHead = snakeBody.Last;
 
             if (snakeBody.Count == 0 || lastHead == null)
@@ -25,21 +22,18 @@ namespace SnakeGame
         }
     }
 
-    public class Point
-    {
+    public class Point {
         public int x;
         public int y;
 
-        public Point(int x, int y)
-        {
+        public Point(int x, int y) {
             this.x = x;
             this.y = y;
         }
 
         public override bool Equals(object? obj) => this.Equals(obj as Point);
 
-        public bool Equals(Point? p)
-        {
+        public bool Equals(Point? p) {
             if (p is null)
                 return false;
 
@@ -54,8 +48,7 @@ namespace SnakeGame
 
         public override int GetHashCode() => (x, y).GetHashCode();
 
-        public static bool operator ==(Point lhs, Point rhs)
-        {
+        public static bool operator ==(Point lhs, Point rhs) {
             if (lhs is null) {
                 if (rhs is null)
                     return true;

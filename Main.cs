@@ -1,17 +1,14 @@
 ﻿using SnakeGame;
 
-public static class Program
-{
+public static class Program {
     // head is snakeBody.Last
     public static LinkedList<Point> snakeBody = new LinkedList<Point>();
     public static Point food = new Point(15, 20);
 
     public static int dx = 1;
     public static int dy = 0;
-        
 
-    public static void Main()
-    {
+    public static void Main() {
         Setup();
         while (true) {
             Logic.Run(snakeBody, food, dx, dy);
@@ -19,8 +16,7 @@ public static class Program
         }
     }
 
-    public static void Setup()
-    {
+    public static void Setup() {
         Console.Clear();
         snakeBody.Clear();
 
