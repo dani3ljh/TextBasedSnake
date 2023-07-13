@@ -1,35 +1,38 @@
 ﻿using SnakeGame;
 
 public static class Program {
-    // head is snakeBody.Last
-    public static LinkedList<Point> snakeBody = new LinkedList<Point>();
-    public static Point food = new Point(15, 20);
+  public readonly static (int, int) BOARD_SIZE = (20,20);
 
-    public static int dx = 1;
-    public static int dy = 0;
+  // head is snake[0]
+  public static Point?[] snake = new Point?[BOARD_SIZE.Item1 * BOARD_SIZE.Item2];
+  public static int snakeSize = 0;
+  public static Point food = new Point(15, 10);
 
-    public static void Main() {
-        Setup();
-        while (true) {
-            Logic.Run(snakeBody, food, dx, dy);
-            Draw.Run(snakeBody, food);
-        }
+  public static int dx = 1;
+  public static int dy = 0;
+
+  public static void Main() {
+    Setup();
+    while (true) {
+      Logic.Run(snake, food, dx, dy);
+      Draw.Run(snake, food);
     }
+  }
 
-    public static void Setup() {
-        Console.Clear();
-        snakeBody.Clear();
+  public static void Setup() {
+    Console.Clear();
 
-        snakeBody.AddLast(new Point(7, 10));
-        snakeBody.AddLast(new Point(8, 10));
-        snakeBody.AddLast(new Point(9, 10));
-        snakeBody.AddLast(new Point(10, 10));
+    snake = new Point?[snake.Length];
 
-        Console.WriteLine(snakeBody.Count);
+    snake[0] = new Point(10, 10);
+    snake[1] = new Point(9, 10);
+    snake[2] = new Point(8, 10);
+    snake[3] = new Point(7, 10);
 
-        food = new Point(15, 20);
+    snakeSize = 4;
 
-        (dx, dy) = (1, 0);
-    }
+    food = new Point(15, 10);
+
+    (dx, dy) = (1, 0);
+  }
 }
-
