@@ -41,10 +41,10 @@ namespace SnakeGame {
     // idk why this is protected i just copied some code
     protected static void OnCtrlCHandler(object sender, ConsoleCancelEventArgs args)
     {
-      Console.CursorVisible = true;
-
       Console.ResetColor();
       Console.Clear();
+
+      Console.CursorVisible = true;
     }
   }
 }
