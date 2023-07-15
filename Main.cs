@@ -12,11 +12,12 @@ public static class Program {
   public static int dy = 0;
 
   public static void Main() {
-    Console.Clear();
+    Draw.Setup();
 
     (snake, snakeSize, food, dx, dy) = Logic.Setup(snake.Length);
+
     while (true) {
-      Logic.Run(snake, food, dx, dy);
+      // Logic.Run(snake, food, dx, dy);
       Draw.Run(snake, food);
     }
   }
