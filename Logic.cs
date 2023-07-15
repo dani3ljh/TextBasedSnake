@@ -2,7 +2,7 @@ namespace SnakeGame {
   public static class Logic {
     // indexs only valid from 0-19
     public static void Run(Point?[] snake, Point food, int dx, int dy) {
-      if (Program.snakeSize == 0 || snake[0] is null)
+      if (Program.snakeSize == 0 || snake[0] == null)
         throw new Exception("Snake Body Empty");
 
       Point newHead = new Point(snake[0].x + dx, snake[0].y + dy);
@@ -32,6 +32,20 @@ namespace SnakeGame {
       }
 
       snake[0] = newHead;
+    }
+
+    // snake, snakeSize, food, dx, dy
+    public static (Point?[], int, Point, int, int) Setup(int snakeLength) {
+      Point?[] snake = new Point?[snakeLength];
+
+      snake[0] = new Point(10, 10);
+      snake[1] = new Point(9, 10);
+      snake[2] = new Point(8, 10);
+      snake[3] = new Point(7, 10);
+
+      Point food = new Point(15, 10);
+
+      return (snake, 4, food, 1, 0);
     }
   }
 

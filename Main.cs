@@ -12,27 +12,12 @@ public static class Program {
   public static int dy = 0;
 
   public static void Main() {
-    Setup();
+    Console.Clear();
+
+    (snake, snakeSize, food, dx, dy) = Logic.Setup(snake.Length);
     while (true) {
       Logic.Run(snake, food, dx, dy);
       Draw.Run(snake, food);
     }
-  }
-
-  public static void Setup() {
-    Console.Clear();
-
-    snake = new Point?[snake.Length];
-
-    snake[0] = new Point(10, 10);
-    snake[1] = new Point(9, 10);
-    snake[2] = new Point(8, 10);
-    snake[3] = new Point(7, 10);
-
-    snakeSize = 4;
-
-    food = new Point(15, 10);
-
-    (dx, dy) = (1, 0);
   }
 }
