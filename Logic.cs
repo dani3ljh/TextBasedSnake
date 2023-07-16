@@ -1,24 +1,24 @@
 namespace SnakeGame {
   public static class Logic {
     // indexs only valid from 0-19
-    public static void Run(Point?[] snake, Point food, int dx, int dy) {
+    public static string? Run(Point?[] snake, Point food, int dx, int dy) {
       if (Program.snakeSize == 0 || snake[0] == null)
-        throw new Exception("Snake Body Empty");
+        return "Snake Body Empty";
 
       Point newHead = new Point(snake[0].x + dx, snake[0].y + dy);
 
       if ((newHead.x < 0) || (newHead.x >= Program.BOARD_SIZE.Item1) || (newHead.y < 0) || (newHead.y >= Program.BOARD_SIZE.Item2))
-        throw new Exception($"Game Over, Score: {Program.snakeSize - 4}, out of bounds");
+        return $"Game Over, Score: {Program.snakeSize - 4}, out of bounds";
 
       bool isCollectingFood = newHead == food;
 
       // if not collecting, then write over snake[size - 1], else dont and increase size
       for (int i = Program.snakeSize - (isCollectingFood ? 1 : 2); i >= 0; i--) {
 				if (snake[i] is null)
-					throw new Exception($"snake at index {i} is null");
+					return $"snake at index {i} is null";
 
         if (snake[i] == newHead)
-          throw new Exception($"Game Over {newHead} found in snake");
+          return $"Game Over {newHead} found in snake";
 
         snake[i+1] = snake[i];
       }
@@ -32,6 +32,8 @@ namespace SnakeGame {
       }
 
       snake[0] = newHead;
+
+      return null;
     }
 
     // snake, snakeSize, food, dx, dy
@@ -75,7 +77,7 @@ namespace SnakeGame {
 
     public override int GetHashCode() => (x, y).GetHashCode();
 
-    public static bool operator ==(Point lhs, Point rhs) {
+    public static bool operator ==(Point? lhs, Point? rhs) {
       if (lhs is null) {
         if (rhs is null)
           return true;
@@ -85,7 +87,7 @@ namespace SnakeGame {
       return lhs.Equals(rhs);
     }
 
-    public static bool operator !=(Point lhs, Point rhs) => !(lhs == rhs);
+    public static bool operator !=(Point? lhs, Point? rhs) => !(lhs == rhs);
 
     public override string ToString() => $"({this.x}, {this.y})";
   }

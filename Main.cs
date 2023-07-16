@@ -11,14 +11,25 @@ public static class Program {
   public static int dx = 1;
   public static int dy = 0;
 
+  public static int ticksDone = 0;
+
   public static void Main() {
     Draw.Setup();
 
     (snake, snakeSize, food, dx, dy) = Logic.Setup(snake.Length);
 
-    while (true) {
-      // Logic.Run(snake, food, dx, dy);
-      Draw.Run(snake, food);
+    System.Threading.Timer t = new System.Threading.Timer(new TimerCallback(Tick), null, 0, 500);
+
+    while (true) }
+  }
+
+  private static void Tick(object timerState) {
+    ticksDone++;
+    string? err = Logic.Run(snake, food, dx, dy);
+    if (err != null) {
+      Draw.CleanUp();
+      throw new Exception(err);
     }
+    Draw.Run(snake, food);
   }
 }
