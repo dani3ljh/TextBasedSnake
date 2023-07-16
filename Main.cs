@@ -20,7 +20,7 @@ public static class Program {
 
     System.Threading.Timer t = new System.Threading.Timer(new TimerCallback(Tick), null, 0, 500);
 
-    while (true) }
+    while (true) {}
   }
 
   private static void Tick(object timerState) {
