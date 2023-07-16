@@ -4,6 +4,8 @@ namespace SnakeGame {
     private static int originalCol;
 
     public static void Run(Point?[] snake, Point food) {
+      Console.Clear();
+
       foreach (Point? snakePoint in snake) {
         if (snakePoint == null) break;
 
@@ -27,13 +29,12 @@ namespace SnakeGame {
     private static void PrintAt(ConsoleColor color, Point point){
       try {
         Console.SetCursorPosition(originalCol + point.x, originalRow + point.y);
-        if (Console.BackgroundColor != color) {
-          Console.BackgroundColor = color;
-        }
+        Console.BackgroundColor = color;
         Console.Write(" ");
-      } catch (ArgumentOutOfRangeException e) {
-        Console.Clear();
         Console.ResetColor();
+      } catch (ArgumentOutOfRangeException e) {
+        Console.ResetColor();
+        Console.Clear();
         Console.WriteLine(e.Message);
       }
     }
