@@ -25,15 +25,33 @@ namespace SnakeGame {
 
       if (isCollectingFood) {
 				Program.snakeSize++;
-				Random rng = new Random();
-				int x = rng.Next(0, Program.BOARD_SIZE.Item1);
-				int y = rng.Next(0, Program.BOARD_SIZE.Item2);
-				food = new Point(x, y);
+				Program.food = GetRandomFreePoint(snake, new Random());
       }
 
       snake[0] = newHead;
 
       return null;
+    }
+
+    public static Point GetRandomFreePoint(Point?[] snake, Random rng) {
+      List<Point> snakePoints = new List<Point>();
+
+      for (int i = 0; i < snake.Length; i++) {
+        if (snake[i] == null) break;
+        snakePoints.Add(snake[i]);
+      }
+
+      List<Point> openPoints = new List<Point>();
+
+      for (int x = 0; x < Program.BOARD_SIZE.Item1; x++) {
+        for (int y = 0; y < Program.BOARD_SIZE.Item2; y++) {
+          Point point = new Point(x, y);
+          if (snakePoints.Contains(point)) continue;
+          openPoints.Add(point);
+        }
+      }
+
+      return openPoints[rng.Next(openPoints.Count)];
     }
 
     // snake, snakeSize, food, dx, dy
